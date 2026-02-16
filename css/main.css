@@ -1,0 +1,66 @@
+:root {
+  /* Colors */
+  --bg: #f7f8fb;
+  --paper: #ffffff;
+  --text: #1e1e1e;
+  --muted: #666;
+  --border: #e5e7eb;
+  --accent: #6c63ff;
+
+  /* Typography */
+  --base-size: 16px;
+  --line: 1.85;
+  --measure: 800px;
+
+  /* Spacing (8px scale) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-6: 48px;
+
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-size: var(--base-size);
+  line-height: var(--line);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: var(--space-4);
+}
+
+header {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border);
+  background: var(--paper);
+}
+
+nav a {
+  margin-right: var(--space-3);
+  text-decoration: none;
+  color: var(--accent);
+}
+
+.card {
+  background: var(--paper);
+  padding: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: var(--space-3);
+}
+
+h1, h2, h3 {
+  line-height: 1.4;
+}
