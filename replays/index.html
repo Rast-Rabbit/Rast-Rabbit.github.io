@@ -1,24 +1,40 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>Replay</title>
-  <link rel="stylesheet" href="/css/main.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Session Logs | らびっと あんど らすとだんじょん</title>
+
+  <!-- 共通 -->
+  <link rel="stylesheet" href="../css/main.css" />
+  <!-- ログページ専用の上書き -->
+     <link rel="stylesheet" href="../css/session-logs.css" />
+  <link rel="stylesheet" href="../css/external.css" />
+  <link rel="stylesheet" href="../css/chared.css">
 </head>
 <body>
-<header>
-  <nav>
-    <a href="/">Home</a>
+
+<header class="header">
+  <nav class="nav">
+    <a  href="/">Home</a>
+    <a class="active" href="/replays/">Replay</a>
+    <a  href="/session-logs/">Session Log</a>
+    <a href="/external/">External</a>
   </nav>
 </header>
+<main class="page">
+  <section class="panel">
+    <h1 class="page-title">かみんぐ・すーん</h1>
+<p>ここにはまだ何もありません。</p>
+  </section>
+</main>
 
-<div class="container">
-  <h1>Replay一覧</h1>
-  <div class="card">
-    <h2>最初のリプレイ</h2>
-    <p>簡単な説明文。</p>
-  </div>
-</div>
+<script>
+  // 背景はそのまま、コンテンツだけ短時間フェード（控えめ）
+  window.addEventListener("load", () => {
+    document.documentElement.classList.add("is-loaded");
+  });
+</script>
 
 </body>
 </html>

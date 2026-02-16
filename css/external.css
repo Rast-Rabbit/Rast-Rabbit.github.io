@@ -1,0 +1,108 @@
+/* External cards only
+   page-shell / page-head / page-title などは既存CSSに任せる */
+
+/* ====== Grid ====== */
+/* モバイル：1列 */
+.external-list{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  padding-top: 16px;
+
+  /* ② カード横幅の上限：1列時でも伸びすぎ防止 */
+  justify-items: center;           /* ← カードを中央寄せ */
+}
+
+/* PC：2列（①） */
+@media (min-width: 900px){
+  .external-list{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    justify-items: stretch;        /* 2列時は各列いっぱいに */
+  }
+}
+
+/* ====== Card ====== */
+.ext-card{
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+
+  padding: 18px;
+  border-radius: 16px;
+
+  background: rgba(0,0,0,0.42);
+  border: 1px solid rgba(255,255,255,0.14);
+
+  text-decoration: none;
+  color: #fff;
+
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+
+  /* ② 横幅上限（1列時の伸びすぎ対策） */
+  width: min(640px, 100%);
+}
+
+/* 2列のときは列幅に合わせる（上限を緩める/外す） */
+@media (min-width: 900px){
+  .ext-card{
+    width: 100%;                  /* 列幅にフィットさせる */
+    max-width: 520px;             /* ② 2列でも上限を付ける（好みで調整） */
+    justify-self: center;         /* 列の中央に寄せる */
+  }
+}
+
+.ext-card:hover{
+  transform: translateY(-3px);
+  background: rgba(0,0,0,0.58);
+  border-color: rgba(255,255,255,0.22);
+}
+
+/* 左：アイコン */
+.ext-icon{
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 12px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+}
+
+.ext-icon img{
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  display: block;
+}
+
+/* 右：本文 */
+.ext-body{
+  flex: 1;
+  min-width: 0;
+}
+
+.ext-title{
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+.ext-desc{
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.85);
+}
+
+/* スマホ微調整 */
+@media (max-width: 768px){
+  .ext-card{ padding: 16px; gap: 14px; }
+  .ext-icon{ width: 40px; height: 40px; flex-basis: 40px; }
+  .ext-icon img{ width: 24px; height: 24px; }
+}

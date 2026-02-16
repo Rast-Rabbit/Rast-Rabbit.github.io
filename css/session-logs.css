@@ -1,0 +1,290 @@
+/* ログページは本文優先：トップより“ガラス感”を弱める */
+
+/* 読み込み時、コンテンツだけ控えめにフェード */
+.page {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.is-loaded .page {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 背景は main.css 側の hero で作っている想定があるので、
+   logsページは body を “背景ステージ”として扱う方が楽。
+   もしトップだけ .hero 背景で、下層が真っ黒なら、ここを有効化してください。
+*/
+/*
+body{
+  background-image: url("../assets/img/bg.webp");
+  background-size: cover;
+  background-position: center bottom;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+@media (max-width: 768px){
+  body{ background-image: url("../assets/img/bg-sp.webp"); }
+}
+@supports (-webkit-touch-callout: none){
+  body{ background-attachment: scroll; }
+}
+*/
+
+.page {
+  min-height: 100vh;
+  padding-top: 92px; /* 固定ヘッダー分 */
+  padding-bottom: 64px;
+}
+
+.page-shell {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 24px;
+
+  background: rgba(0,0,0,0.58);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 16px;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.page-head {
+  padding: 8px 8px 18px;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 0.02em;
+}
+
+.page-lead {
+  margin: 10px 0 0;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.7;
+}
+
+/* ツールバー */
+.list-toolbar {
+  margin-top: 10px;
+  padding: 12px 8px 18px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.chip {
+  appearance: none;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(0,0,0,0.35);
+  color: rgba(255,255,255,0.86);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.chip:hover {
+  border-color: rgba(255,255,255,0.30);
+  color: #fff;
+}
+
+.chip.is-active {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.30);
+  color: #fff;
+}
+
+.search-row {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.search {
+  width: min(460px, 100%);
+}
+
+.search-input {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(0,0,0,0.35);
+  color: #fff;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: rgba(255,255,255,0.35);
+}
+
+/* 一覧 */
+.log-list {
+  display: grid;
+  gap: 16px;
+  padding: 18px 8px 8px;
+}
+
+.log-card {
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(0,0,0,0.40);
+  overflow: hidden;
+}
+
+.log-link {
+  display: flex;
+  gap: 16px;
+  padding: 18px;
+  text-decoration: none;
+  color: #fff;
+  align-items: stretch;
+}
+
+.log-link:hover {
+  background: rgba(0,0,0,0.18);
+}
+
+.log-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.log-title {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: 0.01em;
+  color: #FF7A5C;
+}
+
+.log-desc {
+  margin: 8px 0 0;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.7;
+}
+
+/* メタ情報 */
+.meta {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px 16px;
+  margin: 12px 0 0;
+  padding: 10px 0 0;
+  border-top: 1px solid rgba(255,255,255,0.10);
+}
+
+.meta-item dt {
+  font-size: 11px;
+  color: rgba(255,255,255,0.60);
+  margin-bottom: 2px;
+}
+
+.meta-item dd {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(255,255,255,0.92);
+}
+
+/* タグ */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.tag {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.86);
+}
+
+/* 右側の「読む」 */
+.log-cta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.85);
+  padding-left: 10px;
+  border-left: 1px solid rgba(255,255,255,0.10);
+  white-space: nowrap;
+}
+
+.arrow {
+  opacity: 0.9;
+}
+
+/* フッター */
+.page-foot {
+  padding: 18px 8px 0;
+}
+
+.note {
+  margin: 0;
+  color: rgba(255,255,255,0.68);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* アクセシビリティ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  .page {
+    padding-top: 88px;
+  }
+
+  .page-shell {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  .log-link {
+    flex-direction: column;
+  }
+
+  .log-cta {
+    border-left: none;
+    padding-left: 0;
+    justify-content: flex-end;
+  }
+
+  .meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+.page{
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  transform: none; /* ← translateYは使わない */
+}
+.is-loaded .page{
+  opacity: 1;
+}
+
+

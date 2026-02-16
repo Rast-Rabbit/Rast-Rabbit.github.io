@@ -1,126 +1,209 @@
-:root {
-  --bg: #0f0f18;
-  --text: #ffffff;
-  --accent: #ffffff;
-
+:root{
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 16px;
   --space-4: 24px;
   --space-6: 48px;
 
-  --radius: 8px;
+  --radius: 14px;
+
+  --header-bg: rgba(0,0,0,0.45);
+  --card-bg: rgba(0,0,0,0.50);
+  --card-bg-hover: rgba(0,0,0,0.65);
+
+  --border: rgba(255,255,255,0.20);
+  --border-strong: rgba(255,255,255,0.28);
+
+  --overlay-top: rgba(0,0,0,0.60);
+  --overlay-bottom: rgba(0,0,0,0.30);
+
+  /* タイトル */
+  --title-size: clamp(34px, 4.2vw, 64px);
+  --title-size-sp: clamp(26px, 8vw, 55px);
+  --title-letter: 0.18em;
+  --title-word-gap: 0.55em;
+  --title-line-gap: 0.55em;
+
+  /* 一文字ジャンプのテンポ（通し番号 --i 方式） */
+  --jump-duration: 5.2s;   /* 周期 */
+  --jump-stagger: 0.06s;   /* 文字間ディレイ */
+  --jump-height: 12px;     /* 跳ね高さ */
+  --jump-steps: 4;         /* 低FPS感 */
+
+  /* ページ共通の左右余白 */
+  --pad-x: 24px;
 }
 
-/* --- Reset --- */
-* {
-  box-sizing: border-box;
+/* ---------------- Reset ---------------- */
+* { box-sizing: border-box; }
+
+html{
+  scrollbar-gutter: stable;
 }
 
-body {
+
+body{
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: var(--bg);
-  color: var(--text);
-}
-
-/* --- Font --- */
-@font-face {
-  font-family: "MisakiGothic";
-  src: url("/assets/fonts/misaki_gothic.woff2") format("woff2");
-  font-display: swap;
-}
-
-/* --- Header (半透明＋ぼかし) --- */
-.header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 100;
-
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
-  border-bottom: 1px solid rgba(255,255,255,0.15);
-}
-
-.nav {
-  display: flex;
-  gap: var(--space-3);
-  padding: var(--space-3) var(--space-4);
-}
-
-.nav a {
-  color: rgba(255,255,255,0.9);
-  text-decoration: none;
-}
-
-.nav a:hover {
   color: #fff;
-  text-decoration: underline;
-}
 
-/* --- Hero Background --- */
-.hero {
-  position: relative;
-  min-height: 100vh;
-
-  display: grid;
-  place-items: center;
-  text-align: center;
-
+  /* ✅ 背景を全ページ共通に：bodyへ移動 */
   background-image: url("/assets/img/bg.webp");
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;
   background-attachment: fixed;
+
+  /* 背景が無い時の保険 */
+  background-color: #000;
 }
 
-/* iOS対策 */
-@supports (-webkit-touch-callout: none) {
-  .hero {
-    background-attachment: scroll;
-  }
-}
-
-/* スマホ用画像 */
-@media (max-width: 640px) {
-  .hero {
+/* ✅ SP用背景 */
+@media (max-width: 768px){
+  body{
     background-image: url("/assets/img/bg-sp.webp");
-    background-position: center bottom;
   }
 }
 
-/* オーバーレイ（視認性確保） */
-.hero::before {
+/* ✅ iOS対策：fixedが怪しい端末はscroll */
+@supports (-webkit-touch-callout: none){
+  body{ background-attachment: scroll; }
+}
+
+/* ✅ 暗幕（オーバーレイ）も全ページ共通に：body::before */
+body::before{
   content: "";
-  position: absolute;
+  position: fixed;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.55),
-    rgba(0,0,0,0.25)
-  );
+  pointer-events: none;
+  background: linear-gradient(to bottom, var(--overlay-top), var(--overlay-bottom));
+  z-index: -1;
+}
+
+/* ---------------- Font ---------------- */
+@font-face{
+  font-family: "MisakiGothic";
+  src:
+    url("../assets/font/misaki_gothic.woff2") format("woff2"),
+    url("../assets/font/misaki_gothic.woff") format("woff");
+  font-display: swap;
+}
+
+/* ---------------- Header ---------------- */
+.header{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+
+  background: var(--header-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.nav{
+  display: flex;
+  gap: 20px;
+  padding: var(--space-3) 32px;
+}
+
+.nav a{
+  color: rgba(255,255,255,0.92);
+  text-decoration: none;
+}
+
+.nav a:hover{
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* ---------------- Hero (Top layout container only) ---------------- */
+.hero{
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  /* ✅ 背景はbodyへ移したので、heroには持たせない */
 }
 
 /* 中身 */
-.hero__inner {
+.hero-inner{
   position: relative;
-  padding: var(--space-6) var(--space-4);
+  text-align: center;
+
+  /* PCは中央寄せを基本に（必要なら後で調整） */
+  padding-top: 0;
+
+  padding-left: var(--pad-x);
+  padding-right: var(--pad-x);
 }
 
-/* --- Title --- */
-.site-title {
-  margin: 0 0 var(--space-3);
-  font-family: "MisakiGothic", sans-serif;
-  font-size: clamp(28px, 5vw, 56px);
-  line-height: 1.1;
-  letter-spacing: 0.06em;
+/* SPはヘッダー分だけ上に余白（今の感じ） */
+@media (max-width: 768px){
+  .hero{
+    align-items: flex-start;
+  }
+
+  .hero-inner{
+    padding-top: 124px;
+  }
 }
 
-.site-title__line {
-  display: block;
+/* ---------------- Title ---------------- */
+/* タイトルの“塊”は中央で保持しつつ、中身は左揃え */
+.site-title{
+  margin: 0 0 56px;
+  font-family: "MisakiGothic", system-ui, sans-serif;
+
+  font-size: var(--title-size);
+  line-height: 1.05;
+  letter-spacing: var(--title-letter);
+
+  display: inline-block; /* 親がtext-align:centerなら塊が中央 */
+  text-align: left;      /* 塊の中は左揃え */
+}
+
+/* タイトル内部：スマホは3行、PCは1行 */
+.title-block{
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--title-line-gap);
+  text-align: left;
+}
+
+/* 単語 */
+.word{
+  display: inline-flex;
+  gap: 0;
+  white-space: nowrap;
+}
+
+/* PC（横長）では1行化 */
+@media (min-width: 769px){
+  .title-block{
+    flex-direction: row;
+    align-items: baseline;
+    gap: var(--title-word-gap);
+  }
+}
+
+/* スマホではサイズを落として収める */
+@media (max-width: 768px){
+  .site-title{
+    font-size: var(--title-size-sp);
+    letter-spacing: 0.12em; /* 小さい時の視覚補正（必要なら調整） */
+  }
+}
+
+/* ---------------- Characters ---------------- */
+.char{
+  display: inline-block;
   color: #fff;
 
   text-shadow:
@@ -133,62 +216,102 @@ body {
     2px -2px #000,
    -2px -2px #000,
     0 6px rgba(0,0,0,0.35);
+
+  /* ✅ 通し番号 --i で順番に跳ねる */
+  animation-name: pixelJump;
+  animation-duration: var(--jump-duration);
+  animation-timing-function: steps(var(--jump-steps));
+  animation-iteration-count: infinite;
+  animation-delay: calc(var(--i) * var(--jump-stagger));
 }
 
-/* --- Subtitle --- */
-.site-subtitle {
-  margin: 0 0 var(--space-4);
+/* “ぴょこっ → ちょい沈む → 止まる” */
+@keyframes pixelJump{
+  0%   { transform: translateY(0); }
+  10%  { transform: translateY(calc(var(--jump-height) * -1)); }
+  22%  { transform: translateY(2px); }
+  32%  { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+
+/* アクセシビリティ：動きを減らす設定なら止める */
+@media (prefers-reduced-motion: reduce){
+  .char{ animation: none; }
+}
+
+/* ✅ アクセント文字（2か所の「ら」用） */
+.char.accent{
+  color: #FF7A5C;
+  text-shadow:
+    2px 0 #000,
+   -2px 0 #000,
+    0 2px #000,
+    0 -2px #000,
+    2px 2px #000,
+   -2px 2px #000,
+    2px -2px #000,
+   -2px -2px #000,
+    0 0 10px rgba(255, 122, 92, 0.45);
+}
+
+/* ---------------- Menu Cards ---------------- */
+.menu{
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: stretch;
+
+  margin-top: 40px; /* タイトルとカードの距離 */
+}
+
+.menu-card{
+  width: 280px;
+  padding: 24px;
+
+  background: var(--card-bg);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+
+  text-decoration: none;
+  color: #fff;
+
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.menu-card:hover{
+  transform: translateY(-6px);
+  background: var(--card-bg-hover);
+  border-color: var(--border-strong);
+}
+
+.menu-card h2{
+  margin: 0 0 10px;
+  font-size: 24px;
+  color: #FF7A5C;
+}
+
+.menu-card p{
+  margin: 0;
   font-size: 14px;
   color: rgba(255,255,255,0.9);
 }
 
-/* --- Buttons --- */
-.hero__nav {
-  display: flex;
-  gap: var(--space-2);
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.btn {
-  padding: 10px 16px;
-  border-radius: var(--radius);
-  border: 1px solid rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-  text-decoration: none;
-  backdrop-filter: blur(6px);
-}
-
-/* --- Wobble Animation --- */
-.wobble {
-  display: inline-block;
-  transform-origin: 50% 60%;
-}
-
-@keyframes wobbleA {
-  0%,100% { transform: translate(0,0) rotate(-0.6deg); }
-  50% { transform: translate(0.6px,-1px) rotate(0.6deg); }
-}
-
-@keyframes wobbleB {
-  0%,100% { transform: translate(0,0.2px) rotate(0.4deg); }
-  50% { transform: translate(-0.7px,0) rotate(-0.4deg); }
-}
-
-@keyframes wobbleC {
-  0%,100% { transform: translate(0,0) rotate(0.2deg); }
-  50% { transform: translate(0.9px,0.2px) rotate(-0.2deg); }
-}
-
-.wobble--1 { animation: wobbleA 4.8s ease-in-out infinite; }
-.wobble--2 { animation: wobbleB 5.6s ease-in-out infinite; }
-.wobble--3 { animation: wobbleC 6.2s ease-in-out infinite; }
-
-@media (prefers-reduced-motion: reduce) {
-  .wobble--1,
-  .wobble--2,
-  .wobble--3 {
-    animation: none;
+/* ---------------- Responsive ---------------- */
+@media (max-width: 768px){
+  .menu{
+    margin-top: 32px;
+    flex-direction: column;
+    align-items: center;
   }
+
+  .menu-card{
+    width: min(520px, calc(100vw - (var(--pad-x) * 2)));
+  }
+}
+
+h1{
+    color: #FF7A5C;
 }
