@@ -2,13 +2,14 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>TRPG Archive</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>らびっと あんど らすとだんじょん</title>
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 
-<header>
-  <nav>
+<header class="header">
+  <nav class="nav">
     <a href="/">Home</a>
     <a href="/replays/">Replay</a>
     <a href="/logs/">Logs</a>
@@ -17,28 +18,25 @@
   </nav>
 </header>
 
-<div class="container">
-  <h1>TRPG Archive</h1>
-  <p>セッションの記録と創作物のアーカイブ。</p>
+<section class="hero" aria-label="サイトタイトル">
+  <div class="hero__inner">
+    <h1 class="site-title">
+      <span class="site-title__line wobble wobble--1">らびっと</span>
+      <span class="site-title__line wobble wobble--2">あんど</span>
+      <span class="site-title__line wobble wobble--3">らすとだんじょん</span>
+    </h1>
 
-  <div class="card">
-    <h2>Replay</h2>
-    <p>整形済みの読み物版リプレイ。</p>
-    <a href="/replays/">一覧を見る</a>
-  </div>
+    <p class="site-subtitle">
+      TRPGリプレイ／セッションログ／外部掲載まとめ
+    </p>
 
-  <div class="card">
-    <h2>Session Logs</h2>
-    <p>生ログ・メモ寄りの記録。</p>
-    <a href="/session-logs/">一覧を見る</a>
+    <div class="hero__nav">
+      <a class="btn" href="/replays/">Replay</a>
+      <a class="btn" href="/logs/">Logs</a>
+      <a class="btn" href="/external/">External</a>
+    </div>
   </div>
-
-  <div class="card">
-    <h2>External Works</h2>
-    <p>pixiv・noteなど外部掲載作品。</p>
-    <a href="/external/">一覧を見る</a>
-  </div>
-</div>
+</section>
 
 </body>
 </html>
