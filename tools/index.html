@@ -1,0 +1,26 @@
+---
+layout: default
+title: ツール
+nav: tools
+page_css:
+  - /css/tools.css
+---
+<main class="tool-page">
+  <iframe
+    src="https://rast-rabbit.github.io/LogConverter-RR-Edition/"
+    id="tool-iframe"
+    class="tool-iframe"
+    title="ログ変換ツール"
+    allow="clipboard-read; clipboard-write"
+  ></iframe>
+</main>
+
+<script>
+/* iframeロード時にサイトの現在テーマをツールへ送信 */
+document.getElementById('tool-iframe').addEventListener('load', function () {
+  var isLight = document.documentElement.classList.contains('light');
+  try {
+    this.contentWindow.postMessage({ theme: isLight ? 'light' : 'dark' }, '*');
+  } catch (e) {}
+});
+</script>
