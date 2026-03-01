@@ -20,4 +20,4 @@ Thumbs.db
 /style.css
 
 # ===== エディタ設定（お好みで管理する場合はコメントアウト） =====
-# .vscode/
+.vscode/
