@@ -254,3 +254,23 @@
 .is-loaded .page {
   opacity: 1;
 }
+
+/* ライトモード */
+:root.light .page-shell { background: rgba(255,255,255,0.90); border-color: rgba(0,0,0,0.12); }
+:root.light .page-lead { color: rgba(20,14,8,0.72); }
+:root.light .list-toolbar { border-top-color: rgba(0,0,0,0.08); border-bottom-color: rgba(0,0,0,0.08); }
+:root.light .chip { border-color: rgba(0,0,0,0.14); background: rgba(0,0,0,0.05); color: rgba(20,14,8,0.80); }
+:root.light .chip:hover { border-color: rgba(0,0,0,0.25); color: rgba(20,14,8,0.92); }
+:root.light .chip.is-active { background: rgba(0,0,0,0.10); border-color: rgba(0,0,0,0.25); color: rgba(20,14,8,0.92); }
+:root.light .search-input { border-color: rgba(0,0,0,0.14); background: rgba(255,255,255,0.80); color: rgba(20,14,8,0.90); }
+:root.light .search-input:focus { border-color: rgba(0,0,0,0.30); }
+:root.light .log-card { background: rgba(255,255,255,0.72); border-color: rgba(0,0,0,0.12); }
+:root.light .log-link { color: rgba(20,14,8,0.90); }
+:root.light .log-link:hover { background: rgba(0,0,0,0.04); }
+:root.light .log-desc { color: rgba(20,14,8,0.72); }
+:root.light .meta { border-top-color: rgba(0,0,0,0.08); }
+:root.light .meta-item dt { color: rgba(20,14,8,0.50); }
+:root.light .meta-item dd { color: rgba(20,14,8,0.82); }
+:root.light .tag { border-color: rgba(0,0,0,0.14); background: rgba(0,0,0,0.05); color: rgba(20,14,8,0.80); }
+:root.light .log-cta { color: rgba(20,14,8,0.70); border-left-color: rgba(0,0,0,0.08); }
+:root.light .note { color: rgba(20,14,8,0.50); }

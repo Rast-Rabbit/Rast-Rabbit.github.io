@@ -106,3 +106,9 @@
   .ext-icon{ width: 40px; height: 40px; flex-basis: 40px; }
   .ext-icon img{ width: 24px; height: 24px; }
 }
+
+/* ライトモード */
+:root.light .ext-card { background: rgba(255,255,255,0.72); border-color: rgba(0,0,0,0.12); color: rgba(20,14,8,0.90); }
+:root.light .ext-card:hover { background: rgba(255,255,255,0.95); border-color: rgba(0,0,0,0.20); }
+:root.light .ext-icon { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.12); }
+:root.light .ext-desc { color: rgba(20,14,8,0.72); }

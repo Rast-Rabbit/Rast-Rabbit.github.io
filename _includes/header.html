@@ -1,8 +1,115 @@
-<header class="header">
-  <nav class="nav">
-    <a href="/" class="{% if page.nav == 'home' %}active{% endif %}">Home</a>
-    <a href="/replays/" class="{% if page.nav == 'replays' %}active{% endif %}">Replay</a>
-    <a href="/session-logs/" class="{% if page.nav == 'session-logs' %}active{% endif %}">Session Log</a>
-    <a href="/external/" class="{% if page.nav == 'external' %}active{% endif %}">External</a>
-  </nav>
+<header class="header" id="site-header">
+  <div class="header-inner">
+
+    <!-- 左端: ロゴ（PC のみ表示） -->
+    <a class="header-logo" href="/">
+      <span class="header-logo-icon" aria-hidden="true">⌂</span>Rabbit<span class="header-logo-amp">&amp;</span><span class="header-logo-r">R</span>astdungeon
+    </a>
+
+    <!-- ナビ（PC のみ表示） -->
+    <nav class="header-nav" aria-label="サイトナビゲーション">
+      <a href="/replays/"       class="header-nav-link{% if page.nav == 'replays' %}       is-active{% endif %}">Replay</a>
+      <a href="/session-logs/"  class="header-nav-link{% if page.nav == 'session-logs' %}  is-active{% endif %}">Session Log</a>
+      <a href="/external/"      class="header-nav-link{% if page.nav == 'external' %}      is-active{% endif %}">External</a>
+    </nav>
+
+    <!-- 右端: テーマ＋変形ボタン分のスペーサー（固定ボタンとの重なり防止） -->
+    <div class="header-controls">
+      <div class="header-morph-spacer" aria-hidden="true"></div>
+    </div>
+
+  </div>
 </header>
+
+<!-- テーマ切り替えボタン（常時表示・右上固定） -->
+<button class="theme-btn" id="theme-btn" aria-label="テーマ切り替え">🌙</button>
+
+<!-- 変形ボタン（PC: ヘッダー内の × と、畳んだ後の ≡ をクロスフェード） -->
+<button class="header-morph-btn" id="header-morph-btn" aria-label="ヘッダーを隠す">
+  <span class="morph-icon morph-icon--x"   aria-hidden="true">×</span>
+  <span class="morph-icon morph-icon--ham" aria-hidden="true">≡</span>
+</button>
+
+<!-- モバイル: フローティング ≡ ボタン（PC では非表示） -->
+<button class="mobile-ham-btn" id="mobile-ham-btn" aria-label="メニューを開く">≡</button>
+
+<!-- モバイル: バックドロップ -->
+<div class="mobile-backdrop" id="mobile-backdrop" aria-hidden="true"></div>
+
+<!-- モバイル: 右ドロワー -->
+<nav class="mobile-drawer" id="mobile-drawer" aria-label="モバイルナビゲーション">
+  <div class="mobile-drawer-header">
+    <span class="mobile-drawer-title">Rabbit&amp;&nbsp;<span class="drawer-logo-r">R</span>astdungeon</span>
+    <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="メニューを閉じる">✕</button>
+  </div>
+  <a href="/"              class="mobile-drawer-link{% if page.nav == 'home' %}            is-active{% endif %}">⌂ Home</a>
+  <a href="/replays/"       class="mobile-drawer-link{% if page.nav == 'replays' %}       is-active{% endif %}">Replay</a>
+  <a href="/session-logs/"  class="mobile-drawer-link{% if page.nav == 'session-logs' %}  is-active{% endif %}">Session Log</a>
+  <a href="/external/"      class="mobile-drawer-link{% if page.nav == 'external' %}      is-active{% endif %}">External</a>
+</nav>
+
+<script>
+(function () {
+  /* テーマをフラッシュなしで復元（DOMContentLoaded 前に実行） */
+  var saved = localStorage.getItem('site-theme');
+  if (saved === 'light') document.documentElement.classList.add('light');
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    /* === PC: ヘッダー折り畳み === */
+    var siteHeader = document.getElementById('site-header');
+    var morphBtn   = document.getElementById('header-morph-btn');
+    var isHidden   = false;
+
+    morphBtn.addEventListener('click', function () {
+      isHidden = !isHidden;
+      siteHeader.classList.toggle('is-hidden', isHidden);
+      morphBtn.classList.toggle('is-gone', isHidden);
+      morphBtn.setAttribute('aria-label', isHidden ? 'ヘッダーを表示' : 'ヘッダーを隠す');
+    });
+
+    /* === モバイル: ドロワー === */
+    var mobileHam  = document.getElementById('mobile-ham-btn');
+    var backdrop   = document.getElementById('mobile-backdrop');
+    var drawer     = document.getElementById('mobile-drawer');
+    var closeBtn   = document.getElementById('mobile-drawer-close');
+
+    function openDrawer() {
+      drawer.classList.add('is-open');
+      backdrop.classList.add('is-open');
+      backdrop.removeAttribute('aria-hidden');
+      mobileHam.setAttribute('aria-label', 'メニューを閉じる');
+    }
+    function closeDrawer() {
+      drawer.classList.remove('is-open');
+      backdrop.classList.remove('is-open');
+      backdrop.setAttribute('aria-hidden', 'true');
+      mobileHam.setAttribute('aria-label', 'メニューを開く');
+    }
+
+    mobileHam.addEventListener('click', function () {
+      drawer.classList.contains('is-open') ? closeDrawer() : openDrawer();
+    });
+    backdrop.addEventListener('click', closeDrawer);
+    closeBtn.addEventListener('click', closeDrawer);
+
+    /* === テーマ切り替え === */
+    var themeBtn = document.getElementById('theme-btn');
+    var isLight  = document.documentElement.classList.contains('light');
+    if (isLight) themeBtn.textContent = '☀';
+
+    themeBtn.addEventListener('click', function () {
+      isLight = !isLight;
+      document.documentElement.classList.toggle('light', isLight);
+      themeBtn.textContent = isLight ? '☀' : '🌙';
+      localStorage.setItem('site-theme', isLight ? 'light' : 'dark');
+
+      /* クロスオリジンも含む全 iframe に postMessage */
+      document.querySelectorAll('iframe').forEach(function (f) {
+        try { f.contentWindow.postMessage({ theme: isLight ? 'light' : 'dark' }, '*'); } catch (e) {}
+      });
+    });
+
+  });
+})();
+</script>

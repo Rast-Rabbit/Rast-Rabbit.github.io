@@ -17,9 +17,17 @@
   --radius: 14px;
 
   /* ヘッダー高さ（iframeのオフセット計算などに使う） */
-  --header-h: 53px;
+  --header-h: 54px;
 
-  --header-bg: rgba(0,0,0,0.45);
+  /* ヘッダー色（ガラスブラック） */
+  --header-bg:          rgba(0,0,0,0.45);
+  --header-border:      rgba(255,255,255,0.15);
+  --header-text:        rgba(255,255,255,0.90);
+  --header-text-muted:  rgba(255,255,255,0.44);
+  --header-active:      #FF7A5C;
+  --header-active-bg:   rgba(255,122,92,0.10);
+  --header-hover:       rgba(255,255,255,0.07);
+
   --card-bg: rgba(0,0,0,0.50);
   --card-bg-hover: rgba(0,0,0,0.65);
 
@@ -28,6 +36,13 @@
 
   --overlay-top: rgba(0,0,0,0.60);
   --overlay-bottom: rgba(0,0,0,0.30);
+
+  /* コンテンツテキスト・サーフェス */
+  --text:       rgba(255,255,255,0.92);
+  --text-muted: rgba(255,255,255,0.82);
+  --text-dim:   rgba(255,255,255,0.60);
+  --surface:    rgba(0,0,0,0.58);
+  --surface-sm: rgba(0,0,0,0.40);
 
   /* タイトルアニメーション */
   --title-size: clamp(34px, 4.2vw, 64px);
@@ -55,6 +70,7 @@
 ----------------------------------------------- */
 html {
   scrollbar-gutter: stable;
+  transition: background-color 0.4s ease;
 
   background-image: url("/assets/img/bg.webp");
   background-size: cover;
@@ -76,7 +92,7 @@ html {
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #fff;
+  color: var(--text);
   background: transparent; /* 背景はhtmlに任せる */
 }
 
@@ -87,6 +103,7 @@ body::before {
   inset: 0;
   pointer-events: none;
   background: linear-gradient(to bottom, var(--overlay-top), var(--overlay-bottom));
+  transition: background 0.4s ease;
   z-index: -1;
 }
 
@@ -99,59 +116,296 @@ body::before {
   font-display: swap;
 }
 
-/* ---------------- ヘッダー ----------------
-   position: fixed で画面上部に固定表示。
-   z-index: 9999 でコンテンツの上に常に重なる。
+/* ---------------- ライトモード変数 ----------------
+   html に .light クラスが付いたときに上書きされる色群
 ----------------------------------------------- */
+:root.light {
+  /* ヘッダー */
+  --header-bg:         rgba(248,244,238,0.90);
+  --header-border:     rgba(0,0,0,0.10);
+  --header-text:       rgba(20,14,8,0.92);
+  --header-text-muted: rgba(20,14,8,0.42);
+  --header-active:     #c94030;
+  --header-active-bg:  rgba(200,64,48,0.09);
+  --header-hover:      rgba(0,0,0,0.05);
+
+  /* 背景オーバーレイを透明にする（html背景は白にする） */
+  --overlay-top:    rgba(0,0,0,0);
+  --overlay-bottom: rgba(0,0,0,0);
+
+  /* カード・ボーダー */
+  --card-bg:      rgba(255,255,255,0.72);
+  --card-bg-hover: rgba(255,255,255,0.95);
+  --border:        rgba(0,0,0,0.12);
+  --border-strong: rgba(0,0,0,0.22);
+
+  /* コンテンツテキスト・サーフェス */
+  --text:       rgba(20,14,8,0.90);
+  --text-muted: rgba(20,14,8,0.72);
+  --text-dim:   rgba(20,14,8,0.50);
+  --surface:    rgba(255,255,255,0.88);
+  --surface-sm: rgba(255,255,255,0.72);
+
+  /* html本体の背景を白に */
+  background-image: none;
+  background-color: #f8f4ef;
+}
+
+/* ---------------- ヘッダー ----------------
+   position: fixed で画面上部に固定。
+   PC: ロゴ（左端）＋ナビ＋コントロール（右端）
+   モバイル: ヘッダーバー非表示、フローティング ≡ のみ
+----------------------------------------------- */
+
+/* ── バー本体 ── */
 .header {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   z-index: 9999;
-
+  height: var(--header-h);
   background: var(--header-bg);
-  backdrop-filter: blur(8px);           /* 背景をぼかしてガラス感を出す */
-  -webkit-backdrop-filter: blur(8px);   /* Safari用プレフィックス */
-
-  border-bottom: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--header-border);
+  transform: translateY(0);
+  transition:
+    transform 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.28s,
+    border-color 0.28s;
 }
+.header.is-hidden { transform: translateY(-100%); }
 
-.header .nav {
+.header-inner {
   display: flex;
   align-items: center;
-  gap: 20px;
-  padding: 16px 32px;
-
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 16px;
-  line-height: 1.2;
+  height: 100%;
+  padding: 0 28px;
 }
 
-.header .nav a {
-  color: rgba(255,255,255,0.92);
+/* ── ロゴ（左端基準） ── */
+.header-logo {
+  display: flex;
+  align-items: center;
   text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--header-text);
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+.header-logo-icon {
+  font-size: 16px;
+  color: var(--header-active);
+  margin-right: 7px;
+  transition: color 0.2s;
+}
+/* & の前後を視覚的に均等に見せる */
+.header-logo-amp { margin: 0 0.28em; }
+/* 2つ目の R: テーマオレンジ＋傾き */
+.header-logo-r {
+  color: var(--header-active);
+  display: inline-block;
+  transform: rotate(-12deg);
+  transform-origin: 50% 80%;
+  font-style: italic;
+  transition: color 0.2s;
+}
+
+/* ── ナビ（ロゴの右、左寄せ） ── */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 40px;
+  flex: 1; /* 残りスペースを占有 → コントロールを右端へ押し出す */
+}
+.header-nav-link {
+  padding: 6px 12px;
+  font-size: 15px;
   font-weight: 600;
-  transition: color 0.2s ease, text-shadow 0.2s ease;
+  color: var(--header-text);
+  text-decoration: none;
+  border-radius: 6px;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  transition: color 0.18s, background 0.18s;
+}
+.header-nav-link:hover { background: var(--header-hover); }
+.header-nav-link.is-active {
+  color: var(--header-active);
+  background: var(--header-active-bg);
 }
 
-.header .nav a:hover {
-  color: #fff;
-  text-decoration: underline;
+/* ── 右端コントロール ── */
+.header-controls {
+  display: flex;
+  align-items: center;
+}
+/* テーマ＋変形ボタンが右端固定なので、その分のスペースを確保 */
+.header-morph-spacer { width: 84px; flex-shrink: 0; }
+
+/* ── テーマ切り替えボタン（常時表示・右上固定） ── */
+.theme-btn {
+  position: fixed;
+  top: 10px; right: 70px;
+  z-index: 10000;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--header-border);
+  color: var(--header-text-muted);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, color 0.15s, border-color 0.28s;
+}
+.theme-btn:hover { background: var(--header-hover); color: var(--header-text); }
+
+/* ── 変形ボタン（PC 専用、常に右端に固定） ── */
+/* ヘッダーが見えているとき: ボーダーあり → × が見える
+   ヘッダーが消えたとき: ボーダー消える → ≡ が現れる */
+.header-morph-btn {
+  position: fixed;
+  top: 10px; right: 28px;
+  z-index: 10000;
+  width: 34px; height: 34px;
+  border-radius: 7px;
+  background: transparent;
+  border: 1px solid var(--header-border);
+  color: var(--header-text-muted);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.24s, color 0.24s, background 0.15s;
+}
+.header-morph-btn:hover { background: var(--header-hover); color: var(--header-text); }
+.header-morph-btn.is-gone {
+  border-color: transparent;
+  color: rgba(255,255,255,0.58);
+}
+:root.light .header-morph-btn.is-gone { color: rgba(20,14,8,0.50); }
+.header-morph-btn.is-gone:hover { color: var(--header-text); }
+
+/* × と ≡ のクロスフェード */
+.morph-icon {
+  position: absolute;
+  line-height: 1;
+  transition: opacity 0.18s;
+}
+.morph-icon--x   { font-size: 13px; opacity: 1; }
+.morph-icon--ham { font-size: 22px; opacity: 0; }
+.header-morph-btn.is-gone .morph-icon--x   { opacity: 0; }
+.header-morph-btn.is-gone .morph-icon--ham { opacity: 1; }
+
+/* ── モバイル: フローティング ≡ ボタン ── */
+.mobile-ham-btn {
+  display: none; /* PC では非表示 */
 }
 
-/* 現在表示しているページのナビリンク（activeクラスをJekyllが付与） */
-.header .nav a.active {
+/* ── モバイル: バックドロップ ── */
+.mobile-backdrop {
+  display: none; /* PC では非表示 */
+  position: fixed; inset: 0;
+  z-index: 9998;
+  background: rgba(0,0,0,0.52);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.26s;
+}
+.mobile-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── モバイル: 右ドロワー ── */
+.mobile-drawer {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: min(280px, 80vw);
+  z-index: 9999;
+  background: rgba(8,6,4,0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-left: 1px solid rgba(255,255,255,0.12);
+  padding: 20px 16px;
+  transform: translateX(110%);
+  transition: transform 0.26s cubic-bezier(0.25, 0, 0, 1);
+  display: flex;
+  flex-direction: column;
+}
+.mobile-drawer.is-open { transform: translateX(0); }
+
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+.mobile-drawer-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.80);
+  letter-spacing: 0.02em;
+}
+.drawer-logo-r {
   color: #FF7A5C;
-  text-shadow:
-    0 0 6px rgba(255,122,92,0.35),
-    0 0 12px rgba(255,122,92,0.15);
+  display: inline-block;
+  transform: rotate(-12deg);
+  transform-origin: 50% 80%;
+  font-style: italic;
 }
+.mobile-drawer-close {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.38);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 6px;
+  transition: color 0.12s;
+}
+.mobile-drawer-close:hover { color: rgba(255,255,255,0.75); }
 
+.mobile-drawer-link {
+  display: block;
+  padding: 11px 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.72);
+  text-decoration: none;
+  border-radius: 8px;
+  margin-bottom: 2px;
+  transition: background 0.12s, color 0.12s;
+}
+.mobile-drawer-link:hover { background: rgba(255,255,255,0.07); color: #fff; }
+.mobile-drawer-link.is-active { color: #FF7A5C; }
+
+/* ── モバイルのみに適用 ── */
 @media (max-width: 768px) {
-  .header .nav {
-    padding: 16px 20px;
-    gap: 16px;
-    flex-wrap: wrap;
+  .header { display: none; }             /* ヘッダーバーを非表示 */
+  .header-morph-btn { display: none; }   /* PC の変形ボタンを非表示 */
+
+  /* テーマボタンをハンバーガーの左隣へ */
+  .theme-btn { top: 13px; right: 62px; width: 32px; height: 32px; font-size: 13px; }
+
+  .mobile-ham-btn {
+    display: flex;
+    position: fixed;
+    top: 14px; right: 16px;
+    z-index: 10000;
+    width: 38px; height: 38px;
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.78);
+    font-size: 24px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: color 0.15s;
   }
+  .mobile-ham-btn:hover { color: #fff; }
+
+  .mobile-backdrop { display: block; }
 }

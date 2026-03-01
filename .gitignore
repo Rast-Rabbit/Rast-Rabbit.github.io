@@ -11,6 +11,7 @@ vendor/
 # ===== Windows固有ファイル =====
 # ダウンロード時にWindowsが自動生成するメタデータファイル（不要）
 *.Zone.Identifier
+*:Zone.Identifier
 Thumbs.db
 
 # ===== プロジェクトルートの孤立ファイル =====

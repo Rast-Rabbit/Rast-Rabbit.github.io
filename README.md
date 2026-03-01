@@ -5,6 +5,43 @@ GitHub Pages（静的サイトホスティング）+ Jekyll（静的サイトジ
 
 ---
 
+## ⚡ 作業開始クイックリファレンス
+
+> ここだけ見れば作業を始められる。詳細は各セクションを参照。
+
+### 1. VSCodeでWSLのファイルを開く
+
+WSL（Ubuntu）のターミナルで、プロジェクトフォルダに移動してから：
+
+```bash
+cd ~/trpg-home-page
+code .
+```
+
+これだけ。VSCodeがWSLモードで起動する（ウィンドウ左下に `><WSL: Ubuntu` と表示されていればOK）。
+
+> Windowsの「エクスプローラー」でも `\\wsl$\Ubuntu\home\a_yot\trpg-home-page` を開けばファイルを閲覧できるが、編集はVSCode経由が安全。
+
+### 2. Jekyllのローカルサーバーを起動する
+
+```bash
+cd ~/trpg-home-page
+bundle exec jekyll serve --livereload
+```
+
+ブラウザで `http://localhost:4000` を開く。ファイルを保存すると自動でリロードされる。止めるときは `Ctrl + C`。
+
+### 3. Claude Codeを起動する
+
+```bash
+cd ~/trpg-home-page
+claude
+```
+
+プロジェクトフォルダで起動すること（フォルダによって記憶する内容が変わるため）。
+
+---
+
 ## 目次
 
 1. [技術スタックの概要](#技術スタックの概要)
