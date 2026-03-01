@@ -1,36 +1,4 @@
-/* ログページは本文優先：トップより“ガラス感”を弱める */
-
-/* 読み込み時、コンテンツだけ控えめにフェード */
-.page {
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.22s ease, transform 0.22s ease;
-}
-
-.is-loaded .page {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* 背景は main.css 側の hero で作っている想定があるので、
-   logsページは body を “背景ステージ”として扱う方が楽。
-   もしトップだけ .hero 背景で、下層が真っ黒なら、ここを有効化してください。
-*/
-/*
-body{
-  background-image: url("../assets/img/bg.webp");
-  background-size: cover;
-  background-position: center bottom;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-}
-@media (max-width: 768px){
-  body{ background-image: url("../assets/img/bg-sp.webp"); }
-}
-@supports (-webkit-touch-callout: none){
-  body{ background-attachment: scroll; }
-}
-*/
+/* ログ一覧・詳細ページ用スタイル */
 
 .page {
   min-height: 100vh;
@@ -278,13 +246,11 @@ body{
 }
 
 
-.page{
+/* コンテンツのフェードイン（背景はそのまま、コンテンツだけ） */
+.page {
   opacity: 0;
   transition: opacity 0.2s ease;
-  transform: none; /* ← translateYは使わない */
 }
-.is-loaded .page{
+.is-loaded .page {
   opacity: 1;
 }
-
-

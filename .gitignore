@@ -1,0 +1,22 @@
+# ===== Jekyll ビルド成果物 =====
+# Jekyllが生成するファイルはgitで管理しない（いつでも再生成できるため）
+_site/
+.jekyll-cache/
+.sass-cache/
+
+# ===== Ruby / Bundler =====
+.bundle/
+vendor/
+
+# ===== Windows固有ファイル =====
+# ダウンロード時にWindowsが自動生成するメタデータファイル（不要）
+*.Zone.Identifier
+Thumbs.db
+
+# ===== プロジェクトルートの孤立ファイル =====
+# サブディレクトリのlog_export.htmlは対象外（/を付けるとルートのみ除外）
+/log_export.html
+/style.css
+
+# ===== エディタ設定（お好みで管理する場合はコメントアウト） =====
+# .vscode/

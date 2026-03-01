@@ -1,0 +1,157 @@
+/* ================================================================
+   base.css — 全ページ共通のリセット・変数・背景・ヘッダー定義
+   このファイルをすべてのページで最初に読み込む
+================================================================ */
+
+/* ---------------- CSS変数（カスタムプロパティ） ----------------
+   var(--変数名) で呼び出せる値の定義。
+   値を変えたいときはここだけ直せばサイト全体に反映される。
+--------------------------------------------------------------- */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-6: 48px;
+
+  --radius: 14px;
+
+  /* ヘッダー高さ（iframeのオフセット計算などに使う） */
+  --header-h: 53px;
+
+  --header-bg: rgba(0,0,0,0.45);
+  --card-bg: rgba(0,0,0,0.50);
+  --card-bg-hover: rgba(0,0,0,0.65);
+
+  --border: rgba(255,255,255,0.20);
+  --border-strong: rgba(255,255,255,0.28);
+
+  --overlay-top: rgba(0,0,0,0.60);
+  --overlay-bottom: rgba(0,0,0,0.30);
+
+  /* タイトルアニメーション */
+  --title-size: clamp(34px, 4.2vw, 64px);
+  --title-size-sp: clamp(26px, 8vw, 55px);
+  --title-letter: 0.18em;
+  --title-word-gap: 0.55em;
+  --title-line-gap: 0.55em;
+
+  --jump-duration: 5.2s;
+  --jump-stagger: 0.06s;
+  --jump-height: 12px;
+  --jump-steps: 4;
+
+  /* ページ共通の左右余白 */
+  --pad-x: 24px;
+}
+
+/* ---------------- Reset ----------------
+   ブラウザごとのデフォルトスタイルを統一する最低限のリセット
+----------------------------------------------- */
+* { box-sizing: border-box; }
+
+/* ---------------- 背景 ----------------
+   htmlに指定することでスクロールバーの溝まで背景色が入る（bodyだと溝が白くなる）
+----------------------------------------------- */
+html {
+  scrollbar-gutter: stable;
+
+  background-image: url("/assets/img/bg.webp");
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #000; /* 画像が読み込まれるまでの保険 */
+}
+
+@media (max-width: 768px) {
+  html { background-image: url("/assets/img/bg-sp.webp"); }
+}
+
+/* iOSはfixedが不安定なのでscrollに切り替える */
+@supports (-webkit-touch-callout: none) {
+  html { background-attachment: scroll; }
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #fff;
+  background: transparent; /* 背景はhtmlに任せる */
+}
+
+/* 暗幕オーバーレイ（背景画像を少し暗くして文字を読みやすくする） */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, var(--overlay-top), var(--overlay-bottom));
+  z-index: -1;
+}
+
+/* ---------------- フォント ---------------- */
+@font-face {
+  font-family: "MisakiGothic";
+  src:
+    url("/assets/font/misaki_gothic.woff2") format("woff2"),
+    url("/assets/font/misaki_gothic.woff") format("woff");
+  font-display: swap;
+}
+
+/* ---------------- ヘッダー ----------------
+   position: fixed で画面上部に固定表示。
+   z-index: 9999 でコンテンツの上に常に重なる。
+----------------------------------------------- */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+
+  background: var(--header-bg);
+  backdrop-filter: blur(8px);           /* 背景をぼかしてガラス感を出す */
+  -webkit-backdrop-filter: blur(8px);   /* Safari用プレフィックス */
+
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.header .nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 32px;
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.header .nav a {
+  color: rgba(255,255,255,0.92);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.header .nav a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* 現在表示しているページのナビリンク（activeクラスをJekyllが付与） */
+.header .nav a.active {
+  color: #FF7A5C;
+  text-shadow:
+    0 0 6px rgba(255,122,92,0.35),
+    0 0 12px rgba(255,122,92,0.15);
+}
+
+@media (max-width: 768px) {
+  .header .nav {
+    padding: 16px 20px;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+}

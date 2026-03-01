@@ -1,0 +1,21 @@
+---
+layout: default
+title: "月夜儚し、恋せよ兎！ (β.ver)"
+nav: session-logs
+page_css:
+  - /css/log-viewer.css
+---
+<div class="log-viewer">
+  <iframe id="log-frame" src="log_export.html" title="月夜儚し、恋せよ兎！ (β.ver)"></iframe>
+</div>
+
+<script>
+  // ログHTMLがサイトヘッダーを自分で持っている場合は非表示にする
+  // （iframeの外側のヘッダーと二重にならないように）
+  document.getElementById('log-frame').addEventListener('load', function () {
+    var inner = this.contentDocument;
+    if (!inner) return;
+    var h = inner.querySelector('.header');
+    if (h) h.style.display = 'none';
+  });
+</script>

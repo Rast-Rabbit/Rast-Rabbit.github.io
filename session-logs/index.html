@@ -1,37 +1,19 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Session Logs | らびっと あんど らすとだんじょん</title>
-
-  <!-- 共通 -->
-  <link rel="stylesheet" href="../css/main.css" />
-  <!-- ログページ専用の上書き -->
-  <link rel="stylesheet" href="../css/session-logs.css" />
-  <link rel="stylesheet" href="../css/chared.css">
-</head>
-<body>
-
-<header class="header">
-  <nav class="nav">
-    <a  href="/">Home</a>
-    <a href="/replays/">Replay</a>
-    <a class="active" href="/session-logs/">Session Log</a>
-    <a href="/external/">External</a>
-  </nav>
-</header>
-
+---
+layout: default
+title: Session Log
+nav: session-logs
+page_css:
+  - /css/session-logs.css
+---
 <main class="page">
-  <section class="page-shell">
-
-    <header class="page-head">
-      <h1 class="page-title">Session Logs</h1>
-      <p class="page-lead">
-        無編集のセッションログ保管所。読みにくいのであんまりおすすめしません。<br>
+<section class="page-shell">
+<header class="page-head">
+<h1 class="page-title">Session Logs</h1>
+<p class="page-lead">
+        無編集のセッションログ保管所。読みにくいのであんまりおすすめしません。<br/>
         自分用です。
       </p>
-    </header>
+</header>
 <!--
     <section class="list-toolbar" aria-label="ログの絞り込み">
       <div class="chip-row">
@@ -51,102 +33,83 @@
       </div>
     </section>
 -->
-    <section class="log-list" aria-label="ログ一覧">
-
-      <!-- 1件 -->
-      <article class="log-card">
-        <a class="log-link" href="./tukinashi_maen/log_export.html">
-          <div class="log-main">
-            <h2 class="log-title">月夜儚し、恋せよ兎！ (電脳魔宴ver)</h2>
-            <p class="log-desc">大人気販売中のシナリオ、つきなしの、お手本（？）みたいなプレイログです。自作のデータいっぱい使って貰えて嬉しかった。<br>ところでスミカクモラ星人って何？</p>
-
-            <dl class="meta">
-              <div class="meta-item">
-                <dt>System</dt><dd>BBT</dd>
-              </div>
-              <div class="meta-item">
-                <dt>Players</dt><dd>ＧＭ：つーあーる<br>ＰＬ：水槽/ラジアン/白い鳥</dd>
-              </div>
-              <div class="meta-item">
-                <dt>Upload</dt><dd><time datetime="2026-02-15">2026-02-16</time></dd>
-              </div>
-              <div class="meta-item">
-                <dt>last updated</dt><dd><time datetime="2026-02-15">2026-02-16</time></dd>
-              </div>
-            </dl>
-
-            <div class="tags" aria-label="タグ">
-              <span class="tag">#つきなし</span>
-              <span class="tag">ラブコメ</span>
-              <span class="tag">ＳＦ</span>
-              <span class="tag">うさぎ</span>
-            </div>
-          </div>
-
-          <div class="log-cta" aria-hidden="true">
-            <span>読む</span>
-            <span class="arrow">→</span>
-          </div>
-        </a>
-      </article>
-
-
-            <article class="log-card">
-        <a class="log-link" href="./tukinashi_β/log_export.html">
-          <div class="log-main">
-            <h2 class="log-title">月夜儚し、恋せよ兎！ (β.ver)</h2>
-            <p class="log-desc">第一回の、粗削りで制御装置がついてない試作機のシナリオを、バカ上手いPLがマンパワーで乗りこなした奴です<br>これお気に入りなので、そのうちリプレイにするかもしれません。それを待ってくれてもいいです。</p>
-
-            <dl class="meta">
-              <div class="meta-item">
-                <dt>System</dt><dd>BBT</dd>
-              </div>
-              <div class="meta-item">
-                <dt>Players</dt><dd>ＧＭ：つーあーる<br>ＰＬ：ばれっと/まっきぃ/夢見月</dd>
-              </div>
-              <div class="meta-item">
-                <dt>Upload</dt><dd><time datetime="2026-02-15">2026-02-16</time></dd>
-              </div>
-              <div class="meta-item">
-                <dt>last updated</dt><dd><time datetime="2026-02-15">2026-02-16</time></dd>
-              </div>
-            </dl>
-
-            <div class="tags" aria-label="タグ">
-              <span class="tag">#つきなし</span>
-              <span class="tag">ラブコメ</span>
-              <span class="tag">ＳＦ</span>
-              <span class="tag">うさぎ</span>
-            </div>
-          </div>
-
-          <div class="log-cta" aria-hidden="true">
-            <span>読む</span>
-            <span class="arrow">→</span>
-          </div>
-        </a>
-      </article>
-
-
-
-      <!-- ここに増やしていく -->
-    </section>
-
-    <footer class="page-foot">
-      <p class="note">
-
-      </p>
-    </footer>
-
-  </section>
+<section aria-label="ログ一覧" class="log-list">
+<!-- 1件 -->
+<article class="log-card">
+<a class="log-link" href="./tukinashi_maen/">
+<div class="log-main">
+<h2 class="log-title">月夜儚し、恋せよ兎！ (電脳魔宴ver)</h2>
+<p class="log-desc">大人気販売中のシナリオ、つきなしの、お手本（？）みたいなプレイログです。自作のデータいっぱい使って貰えて嬉しかった。<br/>ところでスミカクモラ星人って何？</p>
+<dl class="meta">
+<div class="meta-item">
+<dt>System</dt><dd>BBT</dd>
+</div>
+<div class="meta-item">
+<dt>Players</dt><dd>ＧＭ：つーあーる<br/>ＰＬ：水槽/ラジアン/白い鳥</dd>
+</div>
+<div class="meta-item">
+<dt>Upload</dt><dd><time datetime="2026-02-15">2026-02-16</time></dd>
+</div>
+<div class="meta-item">
+<dt>last updated</dt><dd><time datetime="2026-02-15">2026-02-16</time></dd>
+</div>
+</dl>
+<div aria-label="タグ" class="tags">
+<span class="tag">#つきなし</span>
+<span class="tag">ラブコメ</span>
+<span class="tag">ＳＦ</span>
+<span class="tag">うさぎ</span>
+</div>
+</div>
+<div aria-hidden="true" class="log-cta">
+<span>読む</span>
+<span class="arrow">→</span>
+</div>
+</a>
+</article>
+<article class="log-card">
+<a class="log-link" href="./tukinashi_β/">
+<div class="log-main">
+<h2 class="log-title">月夜儚し、恋せよ兎！ (β.ver)</h2>
+<p class="log-desc">第一回の、粗削りで制御装置がついてない試作機のシナリオを、バカ上手いPLがマンパワーで乗りこなした奴です<br/>これお気に入りなので、そのうちリプレイにするかもしれません。それを待ってくれてもいいです。</p>
+<dl class="meta">
+<div class="meta-item">
+<dt>System</dt><dd>BBT</dd>
+</div>
+<div class="meta-item">
+<dt>Players</dt><dd>ＧＭ：つーあーる<br/>ＰＬ：ばれっと/まっきぃ/夢見月</dd>
+</div>
+<div class="meta-item">
+<dt>Upload</dt><dd><time datetime="2026-02-15">2026-02-16</time></dd>
+</div>
+<div class="meta-item">
+<dt>last updated</dt><dd><time datetime="2026-02-15">2026-02-16</time></dd>
+</div>
+</dl>
+<div aria-label="タグ" class="tags">
+<span class="tag">#つきなし</span>
+<span class="tag">ラブコメ</span>
+<span class="tag">ＳＦ</span>
+<span class="tag">うさぎ</span>
+</div>
+</div>
+<div aria-hidden="true" class="log-cta">
+<span>読む</span>
+<span class="arrow">→</span>
+</div>
+</a>
+</article>
+<!-- ここに増やしていく -->
+</section>
+<footer class="page-foot">
+<p class="note">
+</p>
+</footer>
+</section>
 </main>
-
 <script>
   // 背景はそのまま、コンテンツだけ短時間フェード（控えめ）
   window.addEventListener("load", () => {
     document.documentElement.classList.add("is-loaded");
   });
 </script>
-
-</body>
-</html>

@@ -1,96 +1,69 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>External | らびっと あんど らすとだんじょん</title>
-
-  <!-- 共通 -->
-  <link rel="stylesheet" href="../css/main.css" />
-  <!-- page-shell 等（Session Logs と同じ囲いを使うならこれを流用） -->
-  <link rel="stylesheet" href="../css/session-logs.css" />
-  <!-- Externalページ（カード部分） -->
-  <link rel="stylesheet" href="../css/external.css" />
-  <!-- 背景＋ヘッダー共通（※ファイル名 shared.css を想定） -->
-  <link rel="stylesheet" href="../css/chared.css" />
-</head>
-
-<body>
-  <header class="header">
-    <nav class="nav">
-      <a href="/">Home</a>
-      <a href="/replays/">Replay</a>
-      <a href="/session-logs/">Session Log</a>
-      <a href="/external/" class="active">External</a>
-    </nav>
-  </header>
-
-  <main class="page">
-    <section class="page-shell">
-      <header class="page-head">
-        <h1 class="page-title">External</h1>
-        <p class="page-lead">他サイトで公開しているコンテンツ。</p>
-      </header>
-
-      <section class="external-list" aria-label="外部サービスリンク一覧">
-        <a class="ext-card" href="https://www.pixiv.net/users/3680988" target="_blank" rel="noreferrer">
-          <div class="ext-icon">
-            <img src="/assets/icons/pixiv.svg" alt="pixiv" loading="lazy">
-          </div>
-          <div class="ext-body">
-            <h2 class="ext-title">pixiv</h2>
-            <p class="ext-desc">オリジナルの小説やTRPGキャラの二次創作などを書いています。えっちな話もあるよ！</p>
-          </div>
-        </a>
-
-        <a class="ext-card" href="https://note.com/a_yottu" target="_blank" rel="noreferrer">
-          <div class="ext-icon">
-            <img src="/assets/icons/note.svg" alt="note" loading="lazy">
-          </div>
-          <div class="ext-body">
-            <h2 class="ext-title">note</h2>
-            <p class="ext-desc">カードゲームの考察記事などを時折上げています。最近はＥＤＨが楽しい。</p>
-          </div>
-        </a>
-
-        <a class="ext-card" href="https://privatter.net/u/RastRabbit" target="_blank" rel="noreferrer">
-          <div class="ext-icon">
-            <img src="/assets/icons/privatter.png" alt="Privatter" loading="lazy">
-          </div>
-          <div class="ext-body">
-            <h2 class="ext-title">Privatter</h2>
-            <p class="ext-desc">ＢＢＴのオリジナルデータのまとめなどがあります。</p>
-          </div>
-        </a>
-
-        <a class="ext-card" href="https://rastrabbit.booth.pm/" target="_blank" rel="noreferrer">
-          <div class="ext-icon">
-            <img src="/assets/icons/booth.svg" alt="BOOTH" loading="lazy">
-          </div>
-          <div class="ext-body">
-            <h2 class="ext-title">BOOTH</h2>
-            <p class="ext-desc">シナリオを！　売っています！！　買ってくれ！！！</p>
-          </div>
-        </a>
-
-        <a class="ext-card" href="https://x.com/RastRabbit" target="_blank" rel="noreferrer">
-          <div class="ext-icon">
-            <img src="/assets/icons/x.svg" alt="X" loading="lazy">
-          </div>
-          <div class="ext-body">
-            <h2 class="ext-title">Twitter（現X）</h2>
-            <p class="ext-desc">メールを読む習慣がないので、ここにリプライかＤＭを飛ばすのがたぶん一番確実な連絡手段です。</p>
-          </div>
-        </a>
-      </section>
-    </section>
-  </main>
-
-  <script>
+---
+layout: default
+title: External
+nav: external
+page_css:
+  - /css/session-logs.css
+  - /css/external.css
+---
+<main class="page">
+<section class="page-shell">
+<header class="page-head">
+<h1 class="page-title">External</h1>
+<p class="page-lead">他サイトで公開しているコンテンツ。</p>
+</header>
+<section aria-label="外部サービスリンク一覧" class="external-list">
+<a class="ext-card" href="https://www.pixiv.net/users/3680988" rel="noreferrer" target="_blank">
+<div class="ext-icon">
+<img alt="pixiv" loading="lazy" src="/assets/icons/pixiv.svg"/>
+</div>
+<div class="ext-body">
+<h2 class="ext-title">pixiv</h2>
+<p class="ext-desc">オリジナルの小説やTRPGキャラの二次創作などを書いています。えっちな話もあるよ！</p>
+</div>
+</a>
+<a class="ext-card" href="https://note.com/a_yottu" rel="noreferrer" target="_blank">
+<div class="ext-icon">
+<img alt="note" loading="lazy" src="/assets/icons/note.svg"/>
+</div>
+<div class="ext-body">
+<h2 class="ext-title">note</h2>
+<p class="ext-desc">カードゲームの考察記事などを時折上げています。最近はＥＤＨが楽しい。</p>
+</div>
+</a>
+<a class="ext-card" href="https://privatter.net/u/RastRabbit" rel="noreferrer" target="_blank">
+<div class="ext-icon">
+<img alt="Privatter" loading="lazy" src="/assets/icons/privatter.png"/>
+</div>
+<div class="ext-body">
+<h2 class="ext-title">Privatter</h2>
+<p class="ext-desc">ＢＢＴのオリジナルデータのまとめなどがあります。</p>
+</div>
+</a>
+<a class="ext-card" href="https://rastrabbit.booth.pm/" rel="noreferrer" target="_blank">
+<div class="ext-icon">
+<img alt="BOOTH" loading="lazy" src="/assets/icons/booth.svg"/>
+</div>
+<div class="ext-body">
+<h2 class="ext-title">BOOTH</h2>
+<p class="ext-desc">シナリオを！　売っています！！　買ってくれ！！！</p>
+</div>
+</a>
+<a class="ext-card" href="https://x.com/RastRabbit" rel="noreferrer" target="_blank">
+<div class="ext-icon">
+<img alt="X" loading="lazy" src="/assets/icons/x.svg"/>
+</div>
+<div class="ext-body">
+<h2 class="ext-title">Twitter（現X）</h2>
+<p class="ext-desc">メールを読む習慣がないので、ここにリプライかＤＭを飛ばすのがたぶん一番確実な連絡手段です。</p>
+</div>
+</a>
+</section>
+</section>
+</main>
+<script>
     // 背景はそのまま、コンテンツだけ短時間フェード（控えめ）
     window.addEventListener("load", () => {
       document.documentElement.classList.add("is-loaded");
     });
   </script>
-</body>
-</html>

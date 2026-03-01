@@ -1,40 +1,20 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Session Logs | らびっと あんど らすとだんじょん</title>
-
-  <!-- 共通 -->
-  <link rel="stylesheet" href="../css/main.css" />
-  <!-- ログページ専用の上書き -->
-     <link rel="stylesheet" href="../css/session-logs.css" />
-  <link rel="stylesheet" href="../css/external.css" />
-  <link rel="stylesheet" href="../css/chared.css">
-</head>
-<body>
-
-<header class="header">
-  <nav class="nav">
-    <a  href="/">Home</a>
-    <a class="active" href="/replays/">Replay</a>
-    <a  href="/session-logs/">Session Log</a>
-    <a href="/external/">External</a>
-  </nav>
-</header>
+---
+layout: default
+title: Replay
+nav: replays
+page_css:
+  - /css/session-logs.css
+  - /css/external.css
+---
 <main class="page">
-  <section class="panel">
-    <h1 class="page-title">かみんぐ・すーん</h1>
+<section class="panel">
+<h1 class="page-title">かみんぐ・すーん</h1>
 <p>ここにはまだ何もありません。</p>
-  </section>
+</section>
 </main>
-
 <script>
   // 背景はそのまま、コンテンツだけ短時間フェード（控えめ）
   window.addEventListener("load", () => {
     document.documentElement.classList.add("is-loaded");
   });
 </script>
-
-</body>
-</html>
