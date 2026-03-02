@@ -1,0 +1,105 @@
+/* 404ページ専用スタイル */
+
+.not-found-shell {
+  max-width: 640px;
+  margin: 92px auto 64px;
+  padding: 56px 40px;
+
+  background: rgba(0,0,0,0.58);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 16px;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  text-align: center;
+}
+
+/* 大きい数字 */
+.not-found-code {
+  font-size: clamp(5rem, 16vw, 8rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  margin: 0 0 12px;
+  font-variant-numeric: tabular-nums;
+}
+.not-found-code .n-coral  { color: #FF7A5C; }
+.not-found-code .n-dim    { color: rgba(255,255,255,0.22); }
+.not-found-code .n-indigo { color: #8880E8; }
+
+/* "Not Found" サブラベル */
+.not-found-label {
+  font-size: 0.80em;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin: 0 0 40px;
+}
+
+/* 仕切り線 */
+.not-found-rule {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.10);
+  margin: 0 0 36px;
+}
+
+/* メッセージ */
+.not-found-msg {
+  color: rgba(255,255,255,0.70);
+  line-height: 1.9;
+  margin: 0 0 12px;
+}
+.not-found-flavor {
+  font-size: 0.88em;
+  color: rgba(255,255,255,0.38);
+  margin: 0 0 44px;
+  line-height: 1.8;
+}
+
+/* ホームボタン */
+.not-found-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  border-radius: 10px;
+  background: rgba(255,122,92,0.12);
+  border: 1px solid #FF7A5C;
+  color: #FF7A5C;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.95em;
+  transition: background 0.2s ease;
+}
+.not-found-home:hover {
+  background: rgba(255,122,92,0.25);
+}
+
+/* モバイル */
+@media (max-width: 768px) {
+  .not-found-shell {
+    margin: 20px 16px 40px;
+    padding: 40px 24px;
+    border-radius: 14px;
+  }
+}
+
+/* ライトモード */
+:root.light .not-found-shell {
+  background: rgba(255,255,255,0.88);
+  border-color: rgba(0,0,0,0.10);
+}
+:root.light .not-found-label  { color: rgba(20,14,8,0.35); }
+:root.light .not-found-rule   { border-top-color: rgba(0,0,0,0.08); }
+:root.light .not-found-msg    { color: rgba(20,14,8,0.72); }
+:root.light .not-found-flavor { color: rgba(20,14,8,0.38); }
+:root.light .not-found-code .n-coral  { color: #c94030; }
+:root.light .not-found-code .n-dim    { color: rgba(20,14,8,0.18); }
+:root.light .not-found-code .n-indigo { color: #5848C0; }
+:root.light .not-found-home {
+  background: rgba(201,64,48,0.08);
+  border-color: #c94030;
+  color: #c94030;
+}
+:root.light .not-found-home:hover { background: rgba(201,64,48,0.18); }
