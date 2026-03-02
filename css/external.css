@@ -91,6 +91,7 @@
   font-weight: 800;
   letter-spacing: 0.01em;
   line-height: 1.2;
+  color: #8880E8;
 }
 
 .ext-desc{
@@ -112,3 +113,4 @@
 :root.light .ext-card:hover { background: rgba(255,255,255,0.95); border-color: rgba(0,0,0,0.20); }
 :root.light .ext-icon { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.12); }
 :root.light .ext-desc { color: rgba(20,14,8,0.72); }
+:root.light .ext-title { color: #5848C0; }

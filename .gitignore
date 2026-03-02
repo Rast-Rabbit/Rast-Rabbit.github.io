@@ -18,6 +18,7 @@ Thumbs.db
 # サブディレクトリのlog_export.htmlは対象外（/を付けるとルートのみ除外）
 /log_export.html
 /style.css
+/darkmode-preview.html
 
 # ===== エディタ設定（お好みで管理する場合はコメントアウト） =====
 .vscode/

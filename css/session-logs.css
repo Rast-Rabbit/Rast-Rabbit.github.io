@@ -132,7 +132,7 @@
   margin: 0;
   font-size: 18px;
   letter-spacing: 0.01em;
-  color: #FF7A5C;
+  color: #8880E8;
 }
 
 .log-desc {
@@ -266,6 +266,7 @@
 :root.light .search-input { border-color: rgba(0,0,0,0.14); background: rgba(255,255,255,0.80); color: rgba(20,14,8,0.90); }
 :root.light .search-input:focus { border-color: rgba(0,0,0,0.30); }
 :root.light .log-card { background: rgba(255,255,255,0.72); border-color: rgba(0,0,0,0.12); }
+:root.light .log-title { color: #5848C0; }
 :root.light .log-link { color: rgba(20,14,8,0.90); }
 :root.light .log-link:hover { background: rgba(0,0,0,0.04); }
 :root.light .log-desc { color: rgba(20,14,8,0.72); }
