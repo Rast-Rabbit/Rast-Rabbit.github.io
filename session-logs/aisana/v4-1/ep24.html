@@ -56,6 +56,24 @@ a.chatlog__timestamp { display: none !important; }
 
 /* ライトモード: ホバー色を明るい系に変更（ダークモードは Discord デフォルトを維持） */
 :root.light .chatlog__message:hover { background-color: rgba(0,0,0,0.04) !important; }
+
+/* (edited) マークを非表示 */
+.chatlog__edited-timestamp { display: none !important; }
+
+/* 発言者名をサイトのメインカラーで統一 */
+.chatlog__author { color: #FF7A5C !important; }
+
+/* コードブロック ライトモード配色 */
+:root.light .chatlog__markdown-pre--multiline,
+:root.light .chatlog__markdown-pre--multiline.hljs {
+  background-color: #f6f8fa !important;
+  color: #24292e !important;
+  border-color: #dde1e6 !important;
+}
+:root.light .chatlog__markdown-pre--inline {
+  background-color: #eef0f2 !important;
+  color: #24292e !important;
+}
 </style>
   <link href="../shared/solarized-dark.min-BA98F.css" rel="stylesheet"/>
 <script src="../shared/highlight.min-D8D27.js"></script>
