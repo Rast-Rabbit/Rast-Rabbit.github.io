@@ -1,0 +1,61 @@
+/* aisana-index.css — おもいでシリーズ目次ページ専用 */
+
+/* サブタイトル */
+.aisana-subtitle { color: #8880E8; font-size: 15px; font-weight: 600; }
+:root.light .aisana-subtitle { color: #5848C0; }
+
+/* ── タブバー ── */
+.show-tab-bar {
+  display: flex;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+  scrollbar-width: none;
+}
+.show-tab-bar::-webkit-scrollbar { display: none; }
+.show-tab {
+  flex-shrink: 0;
+  padding: 10px 14px;
+  font-size: 13px; font-weight: 600;
+  color: var(--text-dim); cursor: pointer;
+  background: transparent; border: none;
+  border-bottom: 2px solid transparent;
+  transition: color .15s, border-color .15s;
+  line-height: 1;
+}
+.show-tab:hover { color: var(--text); }
+.show-tab.is-active {
+  color: var(--header-active);
+  border-bottom-color: var(--header-active);
+}
+
+/* ── パネル ── */
+.show-panel { display: none; padding-top: 20px; }
+.show-panel.is-active { display: block; }
+.panel-head {
+  display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+  margin-bottom: 16px; padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.panel-show-id    { font-size: 18px; font-weight: 700; color: #8880E8; }
+.panel-show-title { font-size: 18px; font-weight: 700; color: #8880E8; }
+:root.light .panel-show-id,
+:root.light .panel-show-title { color: #5848C0; }
+.panel-count      { font-size: 12px; color: var(--text-dim); margin-left: auto; }
+
+/* ── 1行1エピソード ── */
+.ep-list { display: flex; flex-direction: column; gap: 3px; }
+.ep-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px; border-radius: 8px; text-decoration: none;
+  transition: background .12s;
+}
+.ep-row:hover { background: var(--surface-sm); }
+.ep-row-title { flex: 1; font-size: 14px; color: var(--text); }
+.ep-row:hover .ep-row-title { color: var(--text); }
+.ep-row-arrow { font-size: 11px; color: var(--text-dim); flex-shrink: 0; }
+
+/* ── 既読 ── */
+.ep-row--read .ep-row-title { color: var(--text-dim); }
+.ep-row--read .ep-row-arrow { opacity: 0.4; }
+.ep-row--read:hover .ep-row-title { color: var(--text-muted); }
