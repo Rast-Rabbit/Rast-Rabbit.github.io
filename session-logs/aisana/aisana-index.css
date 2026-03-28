@@ -1,9 +1,5 @@
 /* aisana-index.css — おもいでシリーズ目次ページ専用 */
 
-/* サブタイトル */
-.aisana-subtitle { color: #8880E8; font-size: 15px; font-weight: 600; }
-:root.light .aisana-subtitle { color: #5848C0; }
-
 /* ── タブバー ── */
 .show-tab-bar {
   display: flex;
@@ -43,19 +39,7 @@
 :root.light .panel-show-title { color: #5848C0; }
 .panel-count      { font-size: 12px; color: var(--text-dim); margin-left: auto; }
 
-/* ── 1行1エピソード ── */
-.ep-list { display: flex; flex-direction: column; gap: 3px; }
-.ep-row {
-  display: flex; align-items: center; gap: 12px;
-  padding: 10px 14px; border-radius: 8px; text-decoration: none;
-  transition: background .12s;
-}
-.ep-row:hover { background: var(--surface-sm); }
-.ep-row-title { flex: 1; font-size: 14px; color: var(--text); }
-.ep-row:hover .ep-row-title { color: var(--text); }
-.ep-row-arrow { font-size: 11px; color: var(--text-dim); flex-shrink: 0; }
-
 /* ── 既読 ── */
-.ep-row--read .ep-row-title { color: var(--text-dim); }
-.ep-row--read .ep-row-arrow { opacity: 0.4; }
-.ep-row--read:hover .ep-row-title { color: var(--text-muted); }
+.log-card--read .log-title { color: var(--text-dim); }
+.log-card--read .log-desc  { color: var(--text-dim); opacity: 0.7; }
+.log-card--read .log-cta   { opacity: 0.4; }
