@@ -30,6 +30,9 @@
 .ep-nav__link:hover { background:var(--surface-sm); color:var(--text); }
 .ep-nav__link--disabled { opacity:.35; pointer-events:none; }
 .ep-nav__ep-num { font-size:11px; color:var(--header-active); display:block; margin-bottom:2px; }
+@media (max-width: 600px) {
+  .ep-nav__link { max-width: 120px; }
+}
 
 /* Discord コンテンツラッパー */
 .discord-content { border-radius:12px; overflow:hidden; background-color:#313338; }
