@@ -39,27 +39,6 @@
 :root.light .panel-show-title { color: #5848C0; }
 .panel-count      { font-size: 12px; color: var(--text-dim); margin-left: auto; }
 
-/* ── りーどみーパネル ── */
-.readme-body {
-  font-size: 14px;
-  line-height: 1.9;
-  color: var(--text);
-  max-width: 680px;
-}
-.readme-section { margin-bottom: 32px; }
-.readme-heading {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--header-active);
-  margin: 0 0 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
-}
-.readme-p { margin: 0 0 8px; }
-.readme-qa { margin-top: 14px; }
-.readme-qa-q { font-weight: 600; margin: 0 0 3px; }
-.readme-qa-a { margin: 0 0 0 1em; }
-
 /* ── 既読 ── */
 .log-card--read .log-title { color: var(--text-dim); }
 .log-card--read .log-desc  { color: var(--text-dim); opacity: 0.7; }
