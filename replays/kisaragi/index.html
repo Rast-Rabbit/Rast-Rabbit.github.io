@@ -1,0 +1,20 @@
+---
+layout: default
+title: "誰もいない駅の話"
+nav: replays
+page_css:
+  - /css/log-viewer.css
+---
+<div class="log-viewer">
+  <iframe id="log-frame" src="log_export.html" title="誰もいない駅の話"></iframe>
+</div>
+
+<script>
+  // ログHTMLがサイトヘッダーを自分で持っている場合は非表示にする
+  document.getElementById('log-frame').addEventListener('load', function () {
+    var inner = this.contentDocument;
+    if (!inner) return;
+    var h = inner.querySelector('.header');
+    if (h) h.style.display = 'none';
+  });
+</script>
