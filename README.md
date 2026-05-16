@@ -48,7 +48,7 @@ claude
 2. [ディレクトリ構造](#ディレクトリ構造)
 3. [ローカル開発環境のセットアップ（WSL2）](#ローカル開発環境のセットアップwsl2)
 4. [日常の作業フロー](#日常の作業フロー)
-5. [セッションログを追加するには](#セッションログを追加するには)
+5. [コンテンツ（リプレイ・セッションログ）を追加するには](#コンテンツリプレイセッションログを追加するには)
 6. [CSS設計の概要](#css設計の概要)
 7. [よくある問題](#よくある問題)
 
@@ -210,57 +210,9 @@ bundle exec jekyll serve --livereload
 
 ---
 
-## セッションログを追加するには
+## コンテンツ（リプレイ・セッションログ）を追加するには
 
-### ログツールでHTMLを生成した場合
-
-1. `session-logs/` 内に新しいフォルダを作成（例: `session-logs/atarashii_log/`）
-
-2. ログツールが生成したファイルをそのままフォルダに入れる：
-   ```
-   session-logs/atarashii_log/
-   ├── log_export.html   ← ツール生成（触らない）
-   ├── style.css         ← ツール生成（触らない）
-   └── images/           ← ツール生成（触らない）
-   ```
-
-3. **ラッパーページを新規作成**（`index.html`）:
-   ```
-   session-logs/atarashii_log/index.html
-   ```
-   内容は既存のものをコピーしてタイトルだけ書き換えるだけでOK：
-   ```html
-   ---
-   layout: default
-   title: "ここにログのタイトル"
-   nav: session-logs
-   page_css:
-     - /css/log-viewer.css
-   ---
-   <div class="log-viewer">
-     <iframe id="log-frame" src="log_export.html" title="ここにログのタイトル"></iframe>
-   </div>
-   <script>
-     document.getElementById('log-frame').addEventListener('load', function () {
-       var inner = this.contentDocument;
-       if (!inner) return;
-       var h = inner.querySelector('.header');
-       if (h) h.style.display = 'none';
-     });
-   </script>
-   ```
-
-4. **`session-logs/index.html` にカードを追加**:
-   既存の `<article class="log-card">` ブロックをコピーして、タイトル・説明・日付・タグを書き換える。
-   リンクは `href="./atarashii_log/"` とする。
-
-5. **ログを再生成したときは** `log_export.html`, `style.css`, `images/` を上書きするだけ。
-   `index.html`（ラッパー）は変更不要。
-
-### なぜこの構造にしているか？
-
-ログツールが生成するHTMLは触らないことで、「再生成したらpushするだけ」という手順にしている。
-サイトのヘッダーや背景はラッパーページ（`index.html`）が提供し、ログ本体はiframeで読み込む。
+詳細な手順は **[`docs/コンテンツ追加手順.md`](docs/コンテンツ追加手順.md)** を参照。
 
 ---
 
