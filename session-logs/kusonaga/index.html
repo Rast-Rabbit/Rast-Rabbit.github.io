@@ -1,0 +1,19 @@
+---
+layout: default
+title: "レッドデッドクソ長ナイト | Session Log"
+nav: session-logs
+page_css:
+  - /css/log-viewer.css
+---
+<div class="log-viewer">
+  <iframe id="log-frame" src="log_export.html" title="レッドデッドクソ長ナイト"></iframe>
+</div>
+
+<script>
+  document.getElementById('log-frame').addEventListener('load', function () {
+    var inner = this.contentDocument;
+    if (!inner) return;
+    var h = inner.querySelector('.header');
+    if (h) h.style.display = 'none';
+  });
+</script>
